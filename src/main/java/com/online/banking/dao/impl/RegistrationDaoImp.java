@@ -62,4 +62,32 @@ public class RegistrationDaoImp extends DbState implements RegistrationDao {
 
 		return users;
 	}
+
+	@Override
+	public Registration login(String username, String password, String type) {
+		String sqlQuery = "select * from registration where username=? and password=? and user_type=?";
+		try {
+
+			preStmt = connection.prepareStatement(sqlQuery);
+			preStmt.setString(1, username);
+			preStmt.setString(2, password);
+			preStmt.setString(3, type);
+
+			resultSet = preStmt.executeQuery();
+
+			if (resultSet.next()) {
+				Registration user = new Registration();
+				user.setUsername(username);
+				user.setPassword(password);
+				user.setType(type);
+
+				return user;
+			}
+		} catch (Exception e) {
+			System.out.println("Error is : " + e);
+		}
+		
+		return null;
+	}
+
 }
