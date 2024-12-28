@@ -1,5 +1,8 @@
 package com.online.banking.entities;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Account {
 	private int accountId;
-	private int userId;
+	private int regId;
 	private String accountNumber;
 	private String accountType;
-	private double balance;
+	private BigDecimal balance;
 	private String createdAt;
 	
 }

@@ -1,13 +1,17 @@
 package com.online.banking.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.online.banking.entities.Account;
 
 public interface AccountService {
-    boolean createAccount(Account account);
-    Account getAccountById(int accountId);
-    List<Account> getAccountsByUserId(int userId);
-    boolean updateAccountBalance(int accountId, double newBalance);
-    boolean deleteAccount(int accountId);
+	void createAccount(Account account);
+
+	Account getAccountById(int accountId);
+
+	void withdraw(int accountId, BigDecimal amount);
+
+	void deposit(int accountId, BigDecimal amount);
+
 }

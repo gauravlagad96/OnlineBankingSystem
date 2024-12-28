@@ -1,14 +1,20 @@
 package com.online.banking;
 
+import com.online.banking.entities.Account;
 import com.online.banking.entities.Registration;
+import com.online.banking.service.AccountService;
 import com.online.banking.service.RegistrationService;
+import com.online.banking.service.impl.AccountServiceImpl;
 import com.online.banking.service.impl.RegistrationServiceImpl;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 public class App {
 	public static void main(String[] args) {
 
 		RegistrationService registrationService = new RegistrationServiceImpl();
+		AccountService accountService = new AccountServiceImpl();
 		System.out.println("------ WELCOME TO ONLINE BANKING SYSTEM -------");
 		do {
 			Scanner sc = new Scanner(System.in);
@@ -57,6 +63,7 @@ public class App {
 
 				if (registrationService.validateBankLogin(bankUserName, bankPassword)) {
 					System.out.println("Bank Login Successfull ! ");
+					System.out.println("Welcome " + bankUserName);
 
 					boolean isBankModuleActive = true; // Flag for the inner loop Bank Users!
 
@@ -80,7 +87,6 @@ public class App {
 									System.out.println("--------------------------");
 								}
 							}
-
 							break;
 
 						case 2:
@@ -104,7 +110,7 @@ public class App {
 
 // USER CUSTOMER
 			case 3:
-				System.out.println("Welcome to Bank Login Module : ");
+				System.out.println("Welcome to Customer Login Module : ");
 
 				System.out.println("Enter UserName : ");
 				String customerUserName = sc.nextLine();
@@ -117,23 +123,57 @@ public class App {
 					boolean isCustomerActive = true;
 
 					do {
-						System.out.println("Enter 1:Check Balance :\t2:Deposit\t3:Transfer\t4:Withdraw\t9:Exit");
+						System.out.println(
+								"Enter 1:Create Account  2:Check Balance :\t3:Deposit\t4:Transfer\t5:withdrawal\t9:Exit");
 						choice = sc.nextInt();
 
 						switch (choice) {
 						case 1:
-							System.out.println("Your Account Balance is : 1000 ");
-							break;
-						case 2:
-							System.out.println("Your Account Balance is : 0000 ");
+							System.out.print("Enter Registration ID: ");
+							int regId = sc.nextInt();
+							sc.nextLine();
+							System.out.print("Enter account number: ");
+							String accountNumber = sc.nextLine();
+							System.out.print("Enter account type: (saving,current,salary,Fixed Deposit,etc...) ");
+							String accountType = sc.nextLine();
+							System.out.print("Enter initial balance: ");
+							BigDecimal balance = sc.nextBigDecimal();
+
+							Account account = new Account();
+							account.setRegId(regId);
+							account.setAccountNumber(accountNumber);
+							account.setAccountType(accountType);
+							account.setBalance(balance);
+
+							accountService.createAccount(account);
+							System.out.println("Account created successfully.");
+
+							System.out.println("Enter ");
 							break;
 
+						case 2:
+							System.out.println("Your Account Balance is : 1000 ");
+							break;
 						case 3:
-							System.out.println("Enter the Beneficiary Account N0:");
+							System.out.print("Enter account ID:");
+							int accountId = sc.nextInt();
+							System.out.print("Enter amount to deposit: ");
+							BigDecimal amount = sc.nextBigDecimal();
+							accountService.deposit(accountId, amount);
+							System.out.println("Deposit successful.");
 							break;
 
 						case 4:
-							System.out.println("Enter the Amount to Withdraw :");
+							System.out.println("Enter the Beneficiary Account N0:");
+							break;
+
+						case 5:
+							System.out.print("Enter account ID: ");
+							accountId = sc.nextInt();
+							System.out.print("Enter amount to withdraw: ");
+							amount = sc.nextBigDecimal();
+							accountService.withdraw(accountId, amount);
+							System.out.println("Withdrawal successful.");
 							break;
 
 						case 9:
