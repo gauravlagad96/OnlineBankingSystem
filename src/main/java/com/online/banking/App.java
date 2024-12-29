@@ -91,7 +91,7 @@ public class App {
 
 						case 2:
 							System.out.println("get user by type");
-							System.out.println("");
+						
 							break;
 						case 9:
 							isBankModuleActive = false;
