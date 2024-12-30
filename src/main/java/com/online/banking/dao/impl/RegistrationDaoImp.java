@@ -59,7 +59,6 @@ public class RegistrationDaoImp extends DbState implements RegistrationDao {
 		} catch (Exception e) {
 			System.out.println("Error is : " + e);
 		}
-
 		return users;
 	}
 
@@ -86,8 +85,36 @@ public class RegistrationDaoImp extends DbState implements RegistrationDao {
 		} catch (Exception e) {
 			System.out.println("Error is : " + e);
 		}
-		
 		return null;
+	}
+
+	@Override
+	public List<Registration> getAllCustomers() {
+
+		List<Registration> customers = new ArrayList<>();
+		try {
+
+			String sql = "select * from registration where user_type='customer'";
+			preStmt = connection.prepareStatement(sql);
+			resultSet = preStmt.executeQuery();
+
+			while (resultSet.next()) {
+				Registration reg = new Registration();
+				reg.setUserId(resultSet.getInt("reg_id"));
+				reg.setUsername(resultSet.getString("username"));
+				reg.setPassword(resultSet.getString("password"));
+				reg.setEmail(resultSet.getString("email"));
+				reg.setPhoneNumber(resultSet.getString("phone_number"));
+				reg.setType(resultSet.getString("user_type"));
+
+				// Add the user to the list
+				customers.add(reg);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error is : " + e);
+		}
+		return customers;
 	}
 
 }

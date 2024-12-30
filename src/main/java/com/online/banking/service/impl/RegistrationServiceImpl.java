@@ -29,7 +29,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public boolean validateBankLogin(String username, String password) {
-		Registration bankUser= regRepo.login(username, password, "bank");
+		Registration bankUser= regRepo.login(username, password,"bank");
 		
 		return bankUser!=null;// return true if bank user exists.
 	}
@@ -38,6 +38,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public boolean validateCustomerLogin(String username, String password) {
 		 Registration customerUser = regRepo.login(username, password, "customer");
 		return customerUser!=null; //return true id customerUser in found otherwise false!
+	}
+
+	@Override
+	public List<Registration> getAllCustomer() {
+		
+		return regRepo.getAllCustomers();
 	}
 	
 

@@ -15,4 +15,6 @@ public interface RegistrationService {
 
 	boolean validateCustomerLogin(String username, String password);
 
+	public List<Registration> getAllCustomer();
+
 }

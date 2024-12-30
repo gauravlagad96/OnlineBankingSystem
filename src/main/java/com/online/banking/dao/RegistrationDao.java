@@ -12,4 +12,6 @@ public interface RegistrationDao {
 
 	Registration login(String username, String password, String type); // Login method
 
+	public List<Registration> getAllCustomers();
+
 }

@@ -10,7 +10,7 @@ import com.online.banking.service.impl.RegistrationServiceImpl;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class App {
+public class OnlineBankingApp {
 	public static void main(String[] args) {
 
 		RegistrationService registrationService = new RegistrationServiceImpl();
@@ -90,8 +90,21 @@ public class App {
 							break;
 
 						case 2:
-							System.out.println("get user by type");
-						
+							System.out.println("Fetching All Customers ...");
+							List<Registration> allCustomer = registrationService.getAllCustomer();
+							if (allCustomer.isEmpty()) {
+								System.out.println("No customer found !");
+							} else {
+								for (Registration customer : allCustomer) {
+									System.out.println("ID: " + customer.getUserId());
+									System.out.println("Username: " + customer.getUsername());
+									System.out.println("Email: " + customer.getEmail());
+									System.out.println("Phone: " + customer.getPhoneNumber());
+									System.out.println("User Type: " + customer.getType());
+									System.out.println("--------------------------");
+								}
+							}
+
 							break;
 						case 9:
 							isBankModuleActive = false;
