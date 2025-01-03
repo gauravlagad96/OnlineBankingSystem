@@ -136,8 +136,8 @@ public class OnlineBankingApp {
 					boolean isCustomerActive = true;
 
 					do {
-						System.out.println(
-								"Enter 1:Create Account  2:Check Balance :\t3:Deposit\t4:Transfer\t5:withdrawal\t9:Exit");
+						System.out.println("Enter 1:Create Account  2:Check Balance :\t3:Deposit\t4:Transfer"
+								+ "\t5:withdrawal\t9:Exit");
 						choice = sc.nextInt();
 
 						switch (choice) {
@@ -161,19 +161,26 @@ public class OnlineBankingApp {
 							accountService.createAccount(account);
 							System.out.println("Account created successfully.");
 
-							System.out.println("Enter ");
 							break;
 
 						case 2:
-							System.out.println("Your Account Balance is : 1000 ");
+							System.out.println("Your Account account NO :  ");
+							 accountNumber=sc.nextLine();
+//							 accountService.viewBalance(accountNumber);
+							 System.out.println("your account Balance is: ");
+											
+							
+							
 							break;
+
 						case 3:
-							System.out.print("Enter account ID:");
-							int accountId = sc.nextInt();
-							System.out.print("Enter amount to deposit: ");
-							BigDecimal amount = sc.nextBigDecimal();
-							accountService.deposit(accountId, amount);
-							System.out.println("Deposit successful.");
+//							System.out.print("Enter account Number:");
+//							accountNumber = sc.nextLine();
+//							sc.nextLine();
+//							System.out.println("Enter amount to deposit: ");
+//							BigDecimal amount = sc.nextBigDecimal();
+//							accountService.deposit(accountNumber, amount);
+//							System.out.println("Deposit successful.");
 							break;
 
 						case 4:
@@ -181,12 +188,13 @@ public class OnlineBankingApp {
 							break;
 
 						case 5:
-							System.out.print("Enter account ID: ");
-							accountId = sc.nextInt();
-							System.out.print("Enter amount to withdraw: ");
-							amount = sc.nextBigDecimal();
-							accountService.withdraw(accountId, amount);
-							System.out.println("Withdrawal successful.");
+//							System.out.println("Enter account Number : ");
+//							accountNumber = sc.nextLine();
+//							sc.nextLine();
+//							System.out.println("Enter amount to withdraw: ");
+//							amount = sc.nextBigDecimal();
+//							accountService.withdraw(accountNumber, amount);
+//							System.out.println("Withdrawal successful.");
 							break;
 
 						case 9:

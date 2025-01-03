@@ -28,45 +28,17 @@ public class AccountDaoImpl extends DbState implements AccountDao {
 	}
 
 	@Override
-	public void updateBalance(int accountId, BigDecimal amount) {
-		String query = "UPDATE Accounts SET balance = ? WHERE account_id = ?";
+	public void viewBalance(BigDecimal balance) {
 		try {
-			preStmt = connection.prepareStatement(query);
-			preStmt.setBigDecimal(1, amount);
-			preStmt.setInt(2, accountId);
-			preStmt.executeUpdate();
-
-		} catch (Exception ex) {
-			System.out.println(ex);
+			String query="select balance from Accounts where accout_no =?";
+			preStmt=connection.prepareStatement(query);
+			preStmt.setBigDecimal(1, balance);
+			preStmt.execute();
+			
+		}catch(Exception e ) {
+			System.out.println("Error is : " + e);
 		}
-	}
-
-	@Override
-	public Account getAccountById(int accountId) {
-		String query = "SELECT * FROM Accounts WHERE account_id = ?";
-		try {
-			preStmt = connection.prepareStatement(query);
-			preStmt = connection.prepareStatement(query);
-			preStmt.setInt(1, accountId);
-			resultSet = preStmt.executeQuery();
-			if (resultSet.next()) {
-				return extractAccountFromResultSet(resultSet); //
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private Account extractAccountFromResultSet(ResultSet resultSet) throws SQLException {
-		Account account = new Account();
-		account.setAccountId(resultSet.getInt("account_id"));
-		account.setRegId(resultSet.getInt("reg_id"));
-		account.setAccountNumber(resultSet.getString("account_number"));
-		account.setAccountType(resultSet.getString("account_type"));
-		account.setBalance(resultSet.getBigDecimal("balance"));
-//		account.setCreatedAt(resultSet.getTimestamp("created_at"));
-		return account;
+		
 	}
 
 }

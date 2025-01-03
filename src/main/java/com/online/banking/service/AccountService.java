@@ -7,11 +7,7 @@ import com.online.banking.entities.Account;
 
 public interface AccountService {
 	void createAccount(Account account);
-
-	Account getAccountById(int accountId);
-
-	void withdraw(int accountId, BigDecimal amount);
-
-	void deposit(int accountId, BigDecimal amount);
+	void viewBalance(BigDecimal balance);
+	
 
 }
