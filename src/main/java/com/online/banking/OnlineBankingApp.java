@@ -164,37 +164,75 @@ public class OnlineBankingApp {
 							break;
 
 						case 2:
-							System.out.println("Your Account account NO :  ");
-							 accountNumber=sc.nextLine();
-//							 accountService.viewBalance(accountNumber);
-							 System.out.println("your account Balance is: ");
-											
-							
-							
+							sc.nextLine();
+							System.out.println("Enter Your Account Number: ");
+							String accountNo = sc.nextLine();
+
+							try {
+								BigDecimal viewBalance = accountService.viewBalance(accountNo); // Fetch balance
+								if (viewBalance != null) {
+									System.out.println("Your Account Balance is: " + viewBalance);
+								} else {
+									System.out.println("Account not found or balance unavailable.");
+								}
+							} catch (Exception e) {
+								System.out.println("An error occurred: " + e.getMessage());
+							}
+
 							break;
 
 						case 3:
-//							System.out.print("Enter account Number:");
-//							accountNumber = sc.nextLine();
-//							sc.nextLine();
-//							System.out.println("Enter amount to deposit: ");
-//							BigDecimal amount = sc.nextBigDecimal();
-//							accountService.deposit(accountNumber, amount);
-//							System.out.println("Deposit successful.");
+							System.out.print("Enter Account Number: ");
+							sc.nextLine();
+							accountNumber = sc.nextLine(); // Read account number
+
+							System.out.println("Enter Amount to Deposit: ");
+							BigDecimal amount = sc.nextBigDecimal(); // Read deposit amount
+
+							try {
+								accountService.deposit(accountNumber, amount); // Call service method
+							} catch (Exception e) {
+								System.out.println("Error during deposit: " + e.getMessage());
+							}
+
 							break;
 
 						case 4:
-							System.out.println("Enter the Beneficiary Account N0:");
+							sc.nextLine();
+							System.out.print("Enter Source Account Number: ");
+							String sourceAccountNumber = sc.nextLine();
+
+							System.out.print("Enter Destination Account Number: ");
+							String destinationAccountNumber = sc.nextLine();
+							System.out.print("Enter Amount to Transfer: ");
+							amount = sc.nextBigDecimal();
+
+							try {
+								accountService.transferMoney(sourceAccountNumber, destinationAccountNumber, amount);
+								System.out.println("Money transferred successfully.");
+							} catch (IllegalArgumentException e) {
+								System.out.println("Error: " + e.getMessage());
+							} catch (Exception e) {
+								System.out.println("An unexpected error occurred: " + e.getMessage());
+							}
 							break;
 
 						case 5:
-//							System.out.println("Enter account Number : ");
-//							accountNumber = sc.nextLine();
-//							sc.nextLine();
-//							System.out.println("Enter amount to withdraw: ");
-//							amount = sc.nextBigDecimal();
-//							accountService.withdraw(accountNumber, amount);
-//							System.out.println("Withdrawal successful.");
+							sc.nextLine();
+							System.out.println("Enter Account Number: ");
+							accountNumber = sc.nextLine(); // Read account number
+
+							System.out.println("Enter Amount to Withdraw: ");
+							amount = sc.nextBigDecimal(); // Read withdrawal amount
+
+							try {
+								accountService.withdraw(accountNumber, amount); // Call service method
+								System.out.println("Withdrawal successful.");
+							} catch (IllegalArgumentException e) {
+								System.out.println("Error: " + e.getMessage());
+							} catch (Exception e) {
+								System.out.println("An error occurred: " + e.getMessage());
+							}
 							break;
 
 						case 9:
@@ -213,7 +251,7 @@ public class OnlineBankingApp {
 				}
 				break;
 
-//Exit From Main App.
+			// Exit From Main App.
 			case 9: {
 				System.out.println("Log Out successfully !");
 				System.exit(0);
